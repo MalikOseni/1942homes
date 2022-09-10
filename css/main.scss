@@ -1,0 +1,837 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    touch-action: auto;
+    border: none;
+	text-decoration: none;
+    outline: none;
+}
+html,body{
+    // font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    scroll-behavior: smooth;
+}
+html::-webkit-scrollbar{
+	width: .5rem;
+}
+html::-webkit-scrollbar-track{
+	background: #fff;
+}
+html::-webkit-scrollbar-thumb{
+	background: #29323c;
+}
+body{
+    min-height: 100vh;
+    // border: 2px solid red;
+    justify-content: center;
+    align-items: center;
+}
+a{
+    text-decoration: none;
+}
+div{
+    display: block;
+}
+p{
+    margin: 0 0 1rem 0;
+}
+.container{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.cta {
+    color: #ffff;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    border: 2px solid goldenrod;
+    border-radius: 50px;
+    margin-top: 30px;
+    font-weight: 700;
+    transition: 1.2s ease color;
+    background: goldenrod;
+}
+.cta:hover {
+    border-color: #ffff;
+    background: transparent;
+}
+ .section-title {
+    font-size: 3rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+// @keyframes section for animation
+@keyframes hamburger_anime{
+    0%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    100%{
+        opacity: 0;
+        transform: scale(1.4);
+    }
+}
+
+// header styling
+#header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: auto;
+    z-index: 1000;
+}
+#header .head{
+    min-height: 5vh;
+    text-decoration: none;
+    transition: .3s ease background-color;
+}
+#header .brand img{
+    width:40px;
+    height: 40px;
+    margin-top: 10px;
+    opacity: .9;
+    position: relative;
+    object-fit: cover;
+    border-radius: 50px;
+}
+#header .navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    max-width: 1312px;
+}
+// this would eliminate the dot and design the ul or ol list 
+// creating mobile view navlist always build in mobile view first
+#header .nav_list ul{
+    list-style: none;
+    position: absolute;
+    background: rgba(0,0,0,0.99);
+    width: 60vw;
+    height: 100vh;
+    left: -100%;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    flex-direction: column;
+    bottom: 0;
+    padding-bottom: 342px;
+    z-index: 1;
+    transition: .5s ease left;
+}
+// using the js active class here to close the ul when its clicked and bring it back
+#header .nav_list ul.active{
+    left: 0;
+}
+
+#header .nav_list ul a{
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: .2rem;
+    display: block;
+    padding: 10px 22px 10px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #ffff;
+    position: relative;
+    width: 100%;
+    
+}
+// effect to display navlist on hover to show the item in a faded packground 
+#header .nav_list ul a::after{
+    content: attr(data-after);
+    position: absolute;
+    top: 70%;
+    left: 60%;
+    transform: translate(-50%, -50%) scale(0);
+    // color: red;
+    color: rgba(254, 247, 247, 0.3);
+    font-size: 1.6rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+    z-index: -1;
+    transition: .3s ease letter-spacing  ;
+}
+#header .nav_list ul li:hover a::after{
+    transform: translate(-50%, -50%) scale(1);
+    letter-spacing: initial;
+    
+}
+#header .nav_list ul a:hover{
+    color: goldenrod;
+}
+// constructing hamburger menu 
+#header .hamburger{
+height: 40px;
+width: 40px;
+display: inline-block;
+border: 3px solid #ffff;
+border-radius: 45%;
+z-index: 100;
+position: relative;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 5px 0;
+transform: scale(.8);
+margin-right: 20px;
+}
+// applying animation effect to hamburger
+#header .hamburger::after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-radius: 45%;
+    border: 3px solid white;
+    animation: hamburger_anime 1s infinite ;
+}
+#header .hamburger .bar{
+position: relative;
+height: 1.5px;
+width: 20px;
+background: white;
+z-index: -1;
+}
+// for the bars after n before the parent bar always note its relative then absolute
+#header .hamburger .bar::after,
+#header .hamburger .bar::before{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #ffff;
+    left: 0;
+    transition: .3s ease;
+    transition-property: top,bottom;  
+}
+// after this is done construct js to make this action responsive to switch n close 
+#header .hamburger .bar::after{
+    top: 8px;
+}
+#header .hamburger .bar::before{
+    bottom: 8px;
+}
+// time to implement the changes to the bar using js hamburger.active
+
+#header .hamburger.active .bar::before{
+    bottom: 0;
+}
+#header .hamburger.active .bar::after{
+    top: 0;
+}
+// do it separately to create a smooth transitioning effect
+//  now if effective we should notice the extra bars shrink into a single bar
+// therefore the effect was sucessfully done.
+// end header styling
+
+// hero styling
+#hero{
+position: relative;
+display: block;
+box-sizing: border-box;
+width: 100%;
+z-index: 1;
+background-position: top center;
+opacity: .9;
+    // background: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)), top center/cover no-repeat fixed;
+}
+#hero .hero::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .7;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+}
+#hero .hero_item{
+    text-align: center;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding: 0 15px 0 15px;
+}
+#hero h1{
+    color: #ffff;
+    font-size: 40px;
+    text-transform: uppercase;
+}
+#hero p{
+    margin-block-end: 1rem;
+    margin-block-start: 1rem;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    color: rgb(254, 236, 236);
+    text-transform: capitalize;
+}
+
+// end hero styling
+
+/*service styling*/ 
+#services .service{
+   flex-direction: column; 
+   text-align: center;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 100px 20px;
+flex-wrap: wrap;
+}
+
+#services .service-top p{
+    font-size: 14px;
+ margin-top: 10px;
+    line-height: 2.5rem;
+    letter-spacing: .02rem;
+    font-weight: 500;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+    
+
+#services .service-bottom{
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-wrap: wrap;
+ margin-top: 50px;
+}
+#services .service-item{
+    flex-basis: 80%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    margin: 10px 5%;
+    color: rgb(253, 254, 247);
+    border-radius: 20px;
+    position: relative;
+    z-index: -1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#services .service-item .icon{
+    width: 40px;
+    height: 40px;
+    margin-bottom: 20px;
+}
+
+#services .service-item p {
+    font-size: 14px;
+    text-align: left;
+    font-weight: 500;
+    font-family: sans-serif;
+}
+#services .service-item h2{
+    font-size: 1.2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+#services .service-item.one{
+    background: linear-gradient(rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)), url(/assets/contruction\ plan.jpeg);
+        background-size: cover;
+        opacity: .8;
+}
+#services .service-item.two{
+    background: linear-gradient(rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)), url(/assets/cleaning.jpg);
+        background-size: cover;
+        opacity: .8;
+}
+#services .service-item.three{
+    background: linear-gradient(rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.7)), url(/assets/interior\ decor.jpeg);
+        background-size: cover;
+        opacity: .8;
+}
+/*End service styling*/ 
+#projects .project-top,
+#contact .contact-top {
+    // padding: 30px;
+    margin-top: 60px;
+}
+// project section styling
+
+#projects .project{
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1500px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+#projects .project-bottom{
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#projects .project-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    flex-direction: column;
+    margin: 20px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#projects .project-info{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-basis: 50%;
+    height: 100%;
+    color: #ffff;
+    padding: 20px;
+    background: linear-gradient(60deg,#3a3c29 0%, #485563 100%);
+}
+
+#projects .project-info h1{
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+#projects .project-info h2{
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: 10px;
+}
+#projects .project-info p{
+    font-size: .7rem;
+    font-weight: 500;
+    margin-top: 20px;
+}
+#projects .project-img{
+    flex-basis: 50%;
+    height: 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+#projects .project-img::after{
+    content: "";
+    left: 0;
+    top: 0;
+    object-fit: contain;
+    position: absolute;
+    background: linear-gradient(60deg, #29323c 0%, #485563 100%);    
+    height: 100%;
+    width: 100%;
+    opacity: .7;
+}
+
+#projects .project-img img{
+    transition: .2s ease transform;
+}
+#projects .project-items:hover .project-img img{
+    transform: scale(1.1);
+}
+// end project section
+
+// about section styling
+
+#about .about{
+    flex-direction: column-reverse;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+#about .col-left{
+    width: 280px;
+    height: 360px;
+}
+#about .col-right{
+    width: 100%;
+}
+#about .col-right h2{
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding-bottom: 5px;
+    letter-spacing: .1rem;
+    margin-bottom: 10px;
+}
+#about .col-right p{
+    margin-bottom: 20px;
+}
+
+#about .col-right .cta:hover{
+    border: 2px solid goldenrod;
+    color: #29323c;
+}
+
+#about  .col-left .about-img{
+    position: relative;
+    height: inherit;
+}
+#about  .col-left .about-img::after{
+    content: "";
+    right: -20px;
+    top: 20px;
+    border: 5px solid goldenrod;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+        box-sizing: border-box;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+#about .col-left .about-img:hover::after{
+    top: 0;
+    right: 0%;
+}
+#about .col-left .about-img img{
+    border: 8px solid white;
+    width: 100%;
+    height: 100%;
+}
+// End about section styling
+
+// contact styling
+#contact .contact{
+    flex-direction: column;
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+}
+
+
+#contact .contact-items{
+    width: 340px;
+}
+
+#contact .map iframe{
+    transition: .5s ease transform;
+    width: 275.5px;
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    align-items: center;
+}
+#contact .map iframe:hover{
+    transform: scale(0.9);
+}
+#contact .contact-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border: 2px solid grey;
+    margin: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 18px 0 #29323c; 
+    transition: .5s ease transform;
+}
+#contact .contact-item:hover{
+    transform: scale(0.95);
+}
+#contact .icons{
+    width: 50px;
+    justify-content: center;
+    position: relative;
+    align-items: center;
+    display: flex;
+    margin: 10px;
+}
+#contact .contact-info h1{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+#contact .contact-info h2{
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+// end contact styling 
+
+// footer section
+
+#footer{
+    background: linear-gradient(60deg, #29323c 0%, #485563 100%);
+}
+#footer .footer{
+    flex-direction: column;
+    min-height: 200px;
+    margin: 0 auto;
+    padding: 0px 20px;
+    text-align: center;
+    color: #ffff;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+#footer .footer-header h1{
+text-transform: uppercase;
+ margin-bottom: 5px;
+}
+#footer .footer-header h1 span{
+    color: goldenrod;
+}
+#footer .footer-header p{
+font-size: 1rem;
+font-weight: 500;
+letter-spacing: .1rem;
+text-align: center;
+text-transform: capitalize;
+margin-bottom: 10px;
+}
+#footer .footer-items{
+    display: flex;
+    margin-bottom: 5px;
+
+}
+#footer .footer-item img{
+    width: 30px;
+    height: 30px;
+    margin: 0 20px;
+    filter: grayscale(1);
+    transition: all .3s ease
+}
+#footer .footer-item img:hover{
+filter: grayscale(0);
+}
+#footer .opening-hours{
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
+    align-items: center;
+}
+#footer table{
+margin: 0 20px;
+}
+#footer p{
+    font-size: 12px;
+}
+
+// end footer section
+
+// media query for tablet view
+
+@media only screen and (min-width: 750px) 
+{
+    p{
+        font-size: 1.2rem;
+    }
+    #services .container,
+    #projects.container,
+    #about .container,
+    #contact .container{
+        min-height: 50vh;
+    }
+    .cta {
+        font-size: 1.8rem;
+        padding: 10px 60px;
+        margin-bottom: 20px;
+    }
+    #hero .hero_item h1{
+        font-size: 4rem;
+    }
+    .section-title{
+        font-size: 3.5rem;
+        padding-bottom: 20px;
+    }
+    #services .service-bottom .service-item{
+         flex-basis: 30%;
+         margin: 1%
+    }
+        #services .service-bottom .service-item h2{
+            font-size: 1.5rem;
+        }
+                #services .service-bottom .service-item p{
+                    font-size: 1rem;
+                    font-weight: 500;
+                }
+                #projects .project-top,
+                #contact .contact-top{
+                    // padding: 30px;
+                    margin-top: 60px;
+                }
+                #projects .project-items{
+                height: 400px;
+                    margin: 0;
+                    width: 100%;
+                    border-radius: 0;
+                    flex-direction: row;
+                }
+                #projects .project-info p{
+                    font-size: 1rem;
+                }
+                #projects .project-info h2{
+                    font-size: 1.5rem;
+                    font-weight: 500;
+                }
+                #projects .project-bottom .project-info{
+                    height: 100%;
+                }
+                #projects .project-bottom .project-img{
+                    height: 100%;
+                }
+
+                #about .about{
+                    flex-direction: row-reverse;
+                }
+                #about .col-left{
+                    width: 600px;
+                    height: 400px;
+                    padding-right: 35px;
+                }
+                #about .col-right{
+                    text-align: left;
+                    padding: 30px;
+                    margin-top: 60px;
+                }
+                #about .col-left .about-img::after{
+                    right: -25px;
+                    top: 30px;
+                    border: 10px solid goldenrod;
+                }
+                #about .section-title{
+                    margin-bottom: 10px;
+                }
+                #contact .contact{
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 50vw;
+                }
+                #contact .contact-items{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    margin: 0;
+                    justify-content: space-evenly;
+                }
+                #contact .contact-item{
+                    flex-basis: 40%;
+                        margin: 1%;
+                    padding: 20px;
+                }
+                #contact .contact-item .icons{
+                    height: 50px;
+                    width: 50px;
+                    margin: 4px;
+                }
+                #contact .contact-item .icons img {
+                    object-fit: contain;
+                }
+                #contact .contact-info{
+                    width: 100%;
+                    padding-left: 20px;
+                    text-align: center;
+                }
+#contact .map iframe{
+    width: 600px;
+    height: 300px;
+}
+#services .service-top p{
+    font-size: 1.2rem;
+}
+
+}
+
+//  end media query for tablet view
+
+// media for desktop
+@media only screen and (min-width: 1000px){
+    #services .service-bottom .service-item {
+            flex-basis: 30%;
+            margin: 1.5%
+    }
+    #service .service-top p{
+        text-align: left;
+        width: 20vw;
+        
+    }
+#projects .project-items:nth-child(even){
+    flex-direction: row-reverse;
+}
+#header .hamburger{
+    display: none;
+}
+#header .nav_list{
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: auto;
+    padding-left: 40px;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+#header .nav_list ul{
+    position: initial;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: auto;
+    left: 0;
+    top: 0;
+    display: inline;
+    background: transparent;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+#header .nav_list ul a::after{
+    display: none;
+}
+#header .nav_list ul li{
+    display: inline-block;
+    justify-content: flex-start;
+}
+#header .nav_list ul li a{
+    padding-left: 20px;
+    font-size: 15px;
+        font-weight: 700;
+}
+#header .brand{
+    margin: 0 auto;
+}
+   #services .container,
+   #projects.container,
+   #about .container,
+   #contact .container {
+       min-height: 100vh;
+   }
+   #services .service-bottom .service-item {
+       flex-basis: 29%;
+       margin: 2%
+   }
+
+}
+//  end media for desktop 
