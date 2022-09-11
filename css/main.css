@@ -8,7 +8,8 @@
   outline: none;
 }
 
-html, body {
+html,
+body {
   font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
 }
@@ -378,24 +379,6 @@ img {
   font-size: 1.2em;
   text-transform: uppercase;
   margin-bottom: 10px;
-}
-
-#services .service-item.one {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/contruction\ plan.jpeg);
-  background-size: cover;
-  opacity: 0.8;
-}
-
-#services .service-item.two {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/cleaning.jpg);
-  background-size: cover;
-  opacity: 0.8;
-}
-
-#services .service-item.three {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(/assets/interior\ decor.jpeg);
-  background-size: cover;
-  opacity: 0.8;
 }
 
 /*End service styling*/
