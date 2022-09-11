@@ -543,6 +543,10 @@ img {
   text-align: center;
 }
 
+#contact .section-title {
+  font-size: 2.7rem;
+}
+
 #contact .contact-items {
   width: 340px;
 }
